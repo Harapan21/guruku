@@ -1,0 +1,94 @@
+@import "mixin";
+@import "topbar";
+body,
+html,
+#root {
+  height: 100vh;
+}
+
+.svg-guru {
+  height: 439px;
+  &.exist {
+    height: 220px;
+  }
+}
+.btn {
+  border: none !important;
+}
+.radius {
+  border-radius: 8px !important;
+}
+.box-shadow-lg {
+  @extend %box-shadow-lg;
+}
+.box-shadow-md {
+  @extend %box-shadow-md;
+}
+.box-shadow {
+  @extend %box-shadow;
+}
+svg path,
+svg rect {
+  fill: #ff6700;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  height: 100vh;
+  max-height: 250px;
+  grid-template-areas: "sekolah Murid Murid" "sekolah Mata-Pelajaran KKm" "sekolah Mata-Pelajaran KKm";
+  grid-gap: 20px;
+  * {
+    color: #fff;
+    border-radius: 5px;
+  }
+  .sekolah {
+    grid-area: sekolah;
+    background-image: linear-gradient(
+      to right top,
+      #7f00ff,
+      #9c00ff,
+      #b500ff,
+      #cc00ff,
+      #e100ff
+    );
+  }
+
+  .Murid {
+    grid-area: Murid;
+    background-image: linear-gradient(
+      to right top,
+      #ff9966,
+      #ff8b62,
+      #ff7d60,
+      #ff6e60,
+      #ff5e62
+    );
+  }
+
+  .KKm {
+    grid-area: KKm;
+    background-image: linear-gradient(
+      to right top,
+      #0cebeb,
+      #00f1e5,
+      #00f6dd,
+      #00fbd2,
+      #29ffc6
+    );
+  }
+
+  .Mata-Pelajaran {
+    grid-area: Mata-Pelajaran;
+    background-image: linear-gradient(
+      to right top,
+      #56ccf2,
+      #25bbf5,
+      #00a9f6,
+      #0096f4,
+      #2f80ed
+    );
+  }
+}
