@@ -17,7 +17,6 @@ export default class Home extends Component {
     }
   }
   render() {
-    console.log(this.props);
     const { guru, sekolah } = this.props;
     return (
       <div className="uk-section uk-section-default uk-width-1-1 uk-flex uk-flex-middle uk-flex-column animated fadeIn">

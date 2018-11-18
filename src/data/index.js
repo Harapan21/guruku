@@ -30,6 +30,10 @@ const DbGuru = {
   sekolah: () =>
     Sekolah.get("sekolah")
       .find({ id: DbGuru.guru().id_sekolah })
+      .value(),
+  murid: () =>
+    Murid.get("murid")
+      .find({ id_guru: DbGuru.authId() })
       .value()
 };
 

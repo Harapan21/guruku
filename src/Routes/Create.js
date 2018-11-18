@@ -12,6 +12,7 @@ import shortid from "shortid";
 import { GuruKu, Auth, Sekolah, DbGuru } from "../data";
 import Loading from "../components/child/loading";
 import Sekolah_Ada from "./Create/Sekolah_Ada";
+import FormSekolah2 from "./Create/Sekolah2";
 class Page extends Component {
   constructor(props) {
     super(props);
@@ -19,7 +20,8 @@ class Page extends Component {
       ArrayPage: [
         <FormGuru {...this.props} />,
         <FormKepala {...this.props} />,
-        <FormSekolah {...this.props} />
+        <FormSekolah {...this.props} />,
+        <FormSekolah2 {...this.props} />
       ],
       sekolah: DbGuru.allsekolah().length > 0
     };
@@ -88,6 +90,8 @@ export default class Create extends Component {
           id_sekolah: "",
           NamaSekolah: "",
           NPSN: "",
+          Telp: "",
+          Email: "",
           AlamatSekolah: "",
           Kelurahan: "",
           Kecamatan: "",
@@ -104,6 +108,10 @@ export default class Create extends Component {
           Kelas: Yup.number().min(1, "Pilih Salah Satu")
         })
       : Yup.object().shape({
+          Telp: Yup.string().required("Tidak boleh kosong"),
+          Email: Yup.string()
+            .email("masukan email dengan benar")
+            .required("Tidak boleh kosong"),
           Nama_Guru: Yup.string().required("Tidak boleh kosong"),
           NIP: Yup.number()
             .typeError("Harus Nomor")
@@ -183,12 +191,14 @@ export default class Create extends Component {
                       nama: values.NamaSekolah,
                       npsn: values.NPSN,
                       alamat: values.AlamatSekolah,
-                      kelurahan: values.kelurahan,
-                      kecamatan: values.kecamatan,
+                      kelurahan: values.Kelurahan,
+                      kecamatan: values.Kecamatan,
                       kota: values.Kota,
                       provinsi: values.Provinsi,
                       kapala: values.Kapala_Sekolah,
-                      nip_kepala: values.NIP2
+                      nip_kepala: values.NIP2,
+                      telp: values.Telp,
+                      email: values.Email
                     })
                     .write();
                 Auth.set("auth", { id: id, isAuth: true }).write();

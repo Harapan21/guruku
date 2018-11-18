@@ -23,22 +23,16 @@ export default function FormSekolah(props) {
       <div className="uk-margin">
         <Field name="NPSN" placeholder="NPSN" component={FormText} />
       </div>
-      <div className="uk-margin uk-margin uk-child-width-1-2 uk-flex">
+      <div className="uk-margin">
+        <Field name="Telp" placeholder="Nomor Telepon" component={FormText} />
+      </div>
+      <div className="uk-margin">
         <Field
-          name="AlamatSekolah"
-          placeholder="Alamat Sekolah"
+          name="Email"
+          placeholder="Email"
+          type="email"
           component={FormText}
         />
-
-        <Field name="ZIP" placeholder="Kode Pos" component={FormText} />
-      </div>
-      <div className="uk-margin uk-margin uk-child-width-1-2 uk-flex">
-        <Field name="Kelurahan" placeholder="Kelurahan" component={FormText} />
-        <Field name="Kecamatan" placeholder="Kecamatan" component={FormText} />
-      </div>
-      <div className="uk-margin uk-child-width-1-2 uk-flex">
-        <Field name="Kota" placeholder="Kota" component={FormText} />
-        <Field name="Provinsi" placeholder="Provinsi" component={FormText} />
       </div>
     </React.Fragment>
   );
