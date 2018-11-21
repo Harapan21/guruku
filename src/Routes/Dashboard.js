@@ -31,7 +31,6 @@ export default class Dashboard extends Component {
               render={() => <Home {...this.state} match={this.props.match} />}
             />
             <Route
-              exact
               path={`${this.props.match.url}/murid`}
               render={() => <MuridList {...this.props} />}
             />

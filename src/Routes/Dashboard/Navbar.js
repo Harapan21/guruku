@@ -25,7 +25,7 @@ export default class Navbar extends Component {
             </li>
             <li>
               <NavLink
-                to={`${this.props.match.url}/murid`}
+                to={`${this.props.match.url}/murid/`}
                 activeClassName="uk-text-bold animated pulse faster"
               >
                 Murid

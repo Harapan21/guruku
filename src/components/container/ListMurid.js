@@ -1,21 +1,39 @@
 import React, { Component } from "react";
 import { DbGuru } from "../../data";
-export default class ListMurid extends Component {
+import { NavLink, withRouter } from "react-router-dom";
+class ListMurid extends Component {
   render() {
     return (
       <ul
-        className="uk-list uk-list-divider uk-width-1-1 uk-text-left"
+        className="uk-list uk-width-1-1 uk-text-left"
         style={{
-          maxHeight: "100vh",
-          height: "100vh",
+          height: "calc(100% - 54px)",
           overflowY: "scroll",
           maxWidth: "100vw",
-          padding: "20px 0px"
+          marginTop: "0px"
         }}
       >
-        <li>List item 1</li>
-        <li>List item 1</li>
+        {this.props.murid.map(murid => (
+          <li style={{ margin: 0 }} key={murid.id}>
+            <NavLink
+              to={`${this.props.match.url}/${murid.id}`}
+              activeStyle={{
+                background: "#EBF5FF"
+              }}
+              style={{
+                color: "unset",
+                textDecoration: "none",
+                display: "block",
+                padding: "10px",
+                textTransform: "capitalize"
+              }}
+            >
+              {murid.nama}
+            </NavLink>
+          </li>
+        ))}
       </ul>
     );
   }
 }
+export default withRouter(ListMurid);
