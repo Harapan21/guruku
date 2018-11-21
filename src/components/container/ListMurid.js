@@ -3,71 +3,19 @@ import { DbGuru } from "../../data";
 export default class ListMurid extends Component {
   render() {
     return (
-      <div
-        className="uk-grid-match uk-padding-small uk-flex-center uk-text-center uk-child-width-1-4"
-        uk-grid="true"
+      <ul
+        className="uk-list uk-list-divider uk-width-1-1 uk-text-left"
+        style={{
+          maxHeight: "100vh",
+          height: "100vh",
+          overflowY: "scroll",
+          maxWidth: "100vw",
+          padding: "20px 0px"
+        }}
       >
-        <div>
-          <div className="uk-card uk-card-default uk-card-body uk-text-bold">
-            Muhammad Idris
-          </div>
-        </div>
-        <div>
-          <div className="uk-card uk-card-default uk-card-body uk-text-bold">
-            Muhammad Idris
-          </div>
-        </div>
-        <div>
-          <div className="uk-card uk-card-default uk-card-body uk-text-bold">
-            Muhammad Idris
-          </div>
-        </div>
-        <div>
-          <div className="uk-card uk-card-default uk-card-body uk-text-bold">
-            Muhammad Idris
-          </div>
-        </div>
-        <div>
-          <div className="uk-card uk-card-default uk-card-body uk-text-bold">
-            Muhammad Idris
-          </div>
-        </div>
-        <div>
-          <div className="uk-card uk-card-default uk-card-body uk-text-bold">
-            Muhammad Idris
-          </div>
-        </div>
-        <div>
-          <div className="uk-card uk-card-default uk-card-body uk-text-bold">
-            Muhammad Idris
-          </div>
-        </div>
-        <div>
-          <div className="uk-card uk-card-default uk-card-body uk-text-bold">
-            Muhammad Idris
-          </div>
-        </div>
-        <div>
-          <div className="uk-card uk-card-default uk-card-body uk-text-bold">
-            Muhammad Idris
-          </div>
-        </div>
-        <div>
-          <div className="uk-card uk-card-default uk-card-body uk-text-bold">
-            Muhammad Idris
-          </div>
-        </div>
-        <div>
-          <div className="uk-card uk-card-default uk-card-body uk-text-bold">
-            Muhammad Idris
-          </div>
-        </div>
-        <div>
-          <div className="uk-card uk-card-default uk-card-body uk-text-bold">
-            Muhammad Idris
-          </div>
-        </div>
-      </div>
+        <li>List item 1</li>
+        <li>List item 1</li>
+      </ul>
     );
   }
 }

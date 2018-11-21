@@ -21,7 +21,6 @@ app.on("ready", () => {
     minWidth: 1024,
     minHeight: 600,
     frame: false,
-    titleBarStyle: process.platform === "darwin" && "hiddenInset",
     show: false
   });
   mainWindow.once("ready-to-show", () => {

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Navbar from "./Navbar";
 export default class Home extends Component {
   state = {
     salam: ""
@@ -19,7 +20,7 @@ export default class Home extends Component {
   render() {
     const { guru, sekolah } = this.props;
     return (
-      <div className="uk-section uk-section-default uk-width-1-1 uk-flex uk-flex-middle uk-flex-column animated fadeIn">
+      <div className="uk-width-1-1 uk-height-1-1 uk-flex uk-flex-middle uk-flex-center uk-flex-column animated fadeIn">
         <h3
           className="uk-text-small uk-margin-remove-bottom "
           style={{ animationDelay: "0.5s" }}
@@ -77,6 +78,16 @@ export default class Home extends Component {
             </h1>
           </div>
         </div>
+
+        <Navbar
+          style={{
+            background: "#fff",
+            position: "absolute",
+            bottom: "0",
+            left: "0"
+          }}
+          match={this.props.match}
+        />
       </div>
     );
   }

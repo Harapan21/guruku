@@ -1,7 +1,4 @@
 import React, { Component } from "react";
-import Navbar from "./Dashboard/Navbar";
-const electron = window.require("electron");
-const { Notification } = electron;
 import { Route } from "react-router-dom";
 import Home from "./Dashboard/Home";
 import MuridList from "./Dashboard/Murid";
@@ -21,7 +18,7 @@ export default class Dashboard extends Component {
         path={`${this.props.match.url}/:dashboard`}
         render={({ match }) => (
           <div
-            className="uk-section uk-section-default uk-height-1-1 uk-width-1-1"
+            className="uk-height-1-1 uk-width-1-1"
             style={{
               position: "relative",
               background: "transparent",
@@ -31,12 +28,12 @@ export default class Dashboard extends Component {
             <Route
               exact
               path={`${this.props.match.url}/home`}
-              render={() => <Home {...this.state} />}
+              render={() => <Home {...this.state} match={this.props.match} />}
             />
             <Route
               exact
               path={`${this.props.match.url}/murid`}
-              render={() => <MuridList />}
+              render={() => <MuridList {...this.props} />}
             />
             <Route
               exact
@@ -52,10 +49,6 @@ export default class Dashboard extends Component {
               exact
               path={`${this.props.match.url}/pengaturan`}
               render={() => <Pengaturan />}
-            />
-            <Navbar
-              style={{ position: "fixed", bottom: "0" }}
-              match={this.props.match}
             />
           </div>
         )}

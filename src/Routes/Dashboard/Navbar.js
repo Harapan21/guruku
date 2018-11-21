@@ -6,11 +6,11 @@ export default class Navbar extends Component {
   render() {
     return (
       <nav
-        className="uk-navbar-container uk-margin uk-navbar-transparent uk-width-1-1 "
+        className="uk-navbar-container uk-margin-remove uk-width-1-1"
         uk-navbar="mode: click"
         style={this.props.style}
       >
-        <div className="uk-navbar-center">
+        <div className="uk-navbar-center uk-padding-remove">
           <a className="uk-navbar-item uk-logo" href="#">
             <Images src={Logo} width={100} />
           </a>
