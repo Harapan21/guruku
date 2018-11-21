@@ -13,8 +13,12 @@ class ListMurid extends Component {
           marginTop: "0px"
         }}
       >
-        {this.props.murid.map(murid => (
-          <li style={{ margin: 0 }} key={murid.id}>
+        {this.props.murid.map((murid, i) => (
+          <li
+            style={{ margin: 0, animationDuration: ".1s" }}
+            key={murid.id}
+            className="animated slideInLeft"
+          >
             <NavLink
               to={`${this.props.match.url}/${murid.id}`}
               activeStyle={{

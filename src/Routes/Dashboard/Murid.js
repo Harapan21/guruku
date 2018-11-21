@@ -2,16 +2,16 @@ import React, { Component } from "react";
 import AddMurid from "../../components/container/AddMurid";
 import ListMurid from "../../components/container/ListMurid";
 import { DbGuru } from "../../data";
-import shortid from "shortid";
 import Images from "../../components/child/Image";
 import Back from "../../Style/back.svg";
 import { Link, Route } from "react-router-dom";
 export default class MuridList extends Component {
   state = {
     murid: [
-      { nama: "harapan", id: "1" },
-      { nama: "tukijem", id: "3" },
-      { nama: "harapans", id: "2" }
+      { nama: "harapan pardamean", id: "1" },
+      { nama: "tukiJem", id: "2" },
+      { nama: "haran", id: "4" },
+      { nama: "han", id: "12" }
     ],
     search: [],
     focus: false
@@ -25,7 +25,7 @@ export default class MuridList extends Component {
   HandleChange = e => {
     const temp = this.state.murid;
     const data = temp.filter(data =>
-      data.nama.includes(e.target.value.toLowerCase())
+      data.nama.toLowerCase().includes(e.target.value.toLowerCase())
     );
     this.setState({ search: data });
   };
@@ -41,7 +41,7 @@ export default class MuridList extends Component {
             }}
           >
             <div
-              className="uk-width-1-1 uk-flex uk-flex-middle uk-flex-between "
+              className="uk-width-1-1 uk-flex uk-flex-middle uk-flex-between"
               style={{
                 background: "#eee",
                 padding: "5px 10px"
@@ -54,15 +54,11 @@ export default class MuridList extends Component {
                   style={{
                     color: "unset",
                     textDecoration: "none",
-                    padding: "5px",
+                    padding: "5px 10px",
                     animationDuration: ".1s"
                   }}
                 >
-                  <Images
-                    src={Back}
-                    width={20}
-                    style={{ marginRight: "5px" }}
-                  />
+                  <Images src={Back} width={20} />
                 </Link>
               )}
               <input
@@ -84,14 +80,22 @@ export default class MuridList extends Component {
                 }
               />
             ) : (
-              <Link to="/" style={{ color: "unset", textDecoration: "none" }}>
-                <div className="uk-width-1-1 uk-padding-small">+</div>
-              </Link>
+              <div
+                className="uk-padding-small uk-text-bold"
+                style={{
+                  height: "calc(100% - 54px)",
+                  overflowY: "scroll",
+                  maxWidth: "100vw",
+                  marginTop: "0px"
+                }}
+              >
+                Murid Kosong
+              </div>
             )}
           </div>
           <div
             className="uk-width-3-4 uk-text-center uk-height-1-1 uk-margin-remove animated slideInRight faster"
-            style={{ padding: 0 }}
+            style={{ padding: 0, position: "relative" }}
           >
             <Route
               path={`${this.props.match.url}/:murid`}
