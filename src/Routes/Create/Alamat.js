@@ -1,7 +1,7 @@
 import React from "react";
 import { FormText, FormSelect } from "../../components/child/form";
 import { Field } from "formik";
-export default function FormSekolah2(props) {
+export default function FormAlamat(props) {
   const {
     values,
     touched,
@@ -14,11 +14,7 @@ export default function FormSekolah2(props) {
   return (
     <React.Fragment>
       <div className="uk-margin uk-margin uk-child-width-1-2 uk-flex">
-        <Field
-          name="AlamatSekolah"
-          placeholder="Alamat Sekolah"
-          component={FormText}
-        />
+        <Field name="Alamat" placeholder="Alamat" component={FormText} />
 
         <Field name="ZIP" placeholder="Kode Pos" component={FormText} />
       </div>

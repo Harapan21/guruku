@@ -12,7 +12,7 @@ import shortid from "shortid";
 import { GuruKu, Auth, Sekolah, DbGuru } from "../data";
 import Loading from "../components/child/loading";
 import Sekolah_Ada from "./Create/Sekolah_Ada";
-import FormSekolah2 from "./Create/Sekolah2";
+import FormAlamat from "./Create/Alamat";
 class Page extends Component {
   constructor(props) {
     super(props);
@@ -21,7 +21,7 @@ class Page extends Component {
         <FormGuru {...this.props} />,
         <FormKepala {...this.props} />,
         <FormSekolah {...this.props} />,
-        <FormSekolah2 {...this.props} />
+        <FormAlamat {...this.props} />
       ],
       sekolah: DbGuru.allsekolah().length > 0
     };
@@ -92,7 +92,7 @@ export default class Create extends Component {
           NPSN: "",
           Telp: "",
           Email: "",
-          AlamatSekolah: "",
+          Alamat: "",
           Kelurahan: "",
           Kecamatan: "",
           Kota: "",
@@ -126,7 +126,7 @@ export default class Create extends Component {
           NPSN: Yup.number()
             .typeError("Harus Nomor")
             .required("Tidak boleh kosong"),
-          AlamatSekolah: Yup.string().required("Tidak boleh kosong"),
+          Alamat: Yup.string().required("Tidak boleh kosong"),
           Kelurahan: Yup.string().required("Tidak boleh kosong"),
           Kecamatan: Yup.string().required("Tidak boleh kosong"),
           Kota: Yup.string().required("Tidak boleh kosong"),
@@ -190,7 +190,7 @@ export default class Create extends Component {
                       id: id_sekolah,
                       nama: values.NamaSekolah,
                       npsn: values.NPSN,
-                      alamat: values.AlamatSekolah,
+                      alamat: values.Alamat,
                       kelurahan: values.Kelurahan,
                       kecamatan: values.Kecamatan,
                       kota: values.Kota,
