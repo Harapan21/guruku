@@ -1,5 +1,5 @@
 import React from "react";
-import { FormText, FormSelect } from "../../components/child/form";
+import { FormText } from "../../components/child/form";
 import { Field } from "formik";
 export default function FormAlamat(props) {
   const {

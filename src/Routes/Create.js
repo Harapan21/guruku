@@ -5,7 +5,7 @@ import Images from "../components/child/Image";
 import Back from "../Style/back.svg";
 import * as Yup from "yup";
 import FormGuru from "./Create/Guru";
-import { Formik, Field } from "formik";
+import { Formik } from "formik";
 import FormSekolah from "./Create/Sekolah";
 import FormKepala from "./Create/KepalaSekolah";
 import shortid from "shortid";

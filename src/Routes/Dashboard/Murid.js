@@ -7,6 +7,7 @@ import Images from "../../components/child/Image";
 import Back from "../../Style/back.svg";
 import Plus from "../../Style/plus.svg";
 import { Link, Route } from "react-router-dom";
+import Muridinfo from "../../components/container/Muridinfo";
 export default class MuridList extends Component {
   state = {
     murid: [{ nama: "harapan", id: "2" }, { nama: "tukijem", id: "1" }],
@@ -105,7 +106,7 @@ export default class MuridList extends Component {
             )}
           </div>
           <div
-            className="uk-width-3-4 uk-text-center uk-height-1-1 uk-margin-remove animated slideInRight faster"
+            className="uk-width-3-4 uk-text-center uk-height-1-1 uk-margin-remove "
             style={{ padding: 0, position: "relative" }}
           >
             <Route
@@ -118,26 +119,24 @@ export default class MuridList extends Component {
                     render={({ match: { params } }) => (
                       <div
                         className="uk-text-bold "
-                        style={{ height: "100vh" }}
+                        style={{
+                          height: "100vh",
+                          maxHeight: "calc(100% - 25px)",
+                          marginTop: "25px"
+                        }}
                       >
-                        <span>Tambah</span>
+                        <AddMurid />
                       </div>
                     )}
                   />
                   <Route
-                    path={`${match.url}/:id`}
+                    exact
+                    path={`${match.url}/id/:id`}
                     render={({ match: { params } }) => {
                       const data = this.state.murid.find(
                         murid => murid.id === params.id
                       );
-                      return (
-                        <div
-                          className="uk-text-bold "
-                          style={{ height: "100vh" }}
-                        >
-                          <span>{data.nama}</span>
-                        </div>
-                      );
+                      return <Muridinfo murid={data} />;
                     }}
                   />
                 </React.Fragment>

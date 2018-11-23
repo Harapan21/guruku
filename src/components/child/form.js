@@ -14,7 +14,7 @@ const FormText = ({
 }) => {
   const { className, ...rest } = props;
   return (
-    <div>
+    <div className={props.width ? props.width : ""}>
       <input
         type="text"
         className={`${className} uk-input uk-width-expand ${errors[
@@ -47,18 +47,22 @@ const FormSelect = ({
   ...props
 }) => {
   return (
-    <div uk-form-custom="target: > * > span:first-child">
-      <select {...field} {...props}>
+    <div
+      uk-form-custom="target: > * > span:first-child "
+      className={props.width ? props.width : ""}
+    >
+      <select {...field} {...props} className="uk-width-1-1">
         {props.children}
       </select>
-      <button className="uk-button uk-button-default" type="button">
+      <button
+        className="uk-button uk-button-default uk-width-1-1"
+        type="button"
+      >
         <span />
         <span uk-icon="icon: chevron-down" />
       </button>
       {touched[field.name] && errors[field.name] && (
-        <span className="uk-label uk-label-danger uk-margin-left">
-          {errors[field.name]}
-        </span>
+        <span className="uk-label uk-label-danger">{errors[field.name]}</span>
       )}
     </div>
   );

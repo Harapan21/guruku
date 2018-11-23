@@ -20,7 +20,7 @@ class ListMurid extends Component {
             className="animated slideInLeft"
           >
             <NavLink
-              to={`${this.props.match.url}/${murid.id}`}
+              to={`${this.props.match.url}/id/${murid.id}`}
               activeStyle={{
                 background: "#EBF5FF"
               }}
