@@ -6,7 +6,7 @@ export default function Personal() {
   return (
     <div className="uk-margin uk-text-left uk-text uk-text-small">
       <label>Personal</label>
-      <div className="uk-margin  uk-margin uk-flex uk-flex-center">
+      <div className="uk-margin uk-flex uk-flex-center">
         <Field
           name="NamaMurid"
           width="uk-width-1-3"

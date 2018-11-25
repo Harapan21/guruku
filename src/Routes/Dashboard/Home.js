@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Navbar from "./Navbar";
+import { DbGuru } from "../../data";
 export default class Home extends Component {
   state = {
     salam: ""
@@ -34,7 +35,7 @@ export default class Home extends Component {
           {guru.nama}
         </h1>
         <div
-          className="grid-container uk-width-1-2 "
+          className="grid-container uk-width-1-2"
           style={{ animationDelay: "2s" }}
         >
           <div className="sekolah uk-card uk-card-default uk-card-body uk-card-small">
@@ -50,7 +51,7 @@ export default class Home extends Component {
               className="uk-text-bold uk-text-large uk-margin-remove"
               style={{ fontSize: "2.5rem" }}
             >
-              0
+              {DbGuru.murid().length}
             </h1>
           </div>
           <div className="KKm uk-card uk-card-default uk-card-body uk-card-small">

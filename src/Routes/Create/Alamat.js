@@ -2,29 +2,50 @@ import React from "react";
 import { FormText } from "../../components/child/form";
 import { Field } from "formik";
 export default function FormAlamat(props) {
-  const {
-    values,
-    touched,
-    errors,
-    isSubmitting,
-    handleChange,
-    handleBlur,
-    handleSubmit
-  } = props;
   return (
     <React.Fragment>
       <div className="uk-margin uk-margin uk-child-width-1-2 uk-flex">
-        <Field name="Alamat" placeholder="Alamat" component={FormText} />
+        <Field
+          name={`Alamat${props.alamat ? props.alamat : ""}`}
+          placeholder="Alamat"
+          component={FormText}
+          disabled={props.disabled}
+        />
 
-        <Field name="ZIP" placeholder="Kode Pos" component={FormText} />
+        <Field
+          name={`ZIP${props.alamat ? props.alamat : ""}`}
+          placeholder="Kode Pos"
+          component={FormText}
+          disabled={props.disabled}
+        />
       </div>
       <div className="uk-margin uk-margin uk-child-width-1-2 uk-flex">
-        <Field name="Kelurahan" placeholder="Kelurahan" component={FormText} />
-        <Field name="Kecamatan" placeholder="Kecamatan" component={FormText} />
+        <Field
+          name={`Kelurahan${props.alamat ? props.alamat : ""}`}
+          placeholder="Kelurahan"
+          component={FormText}
+          disabled={props.disabled}
+        />
+        <Field
+          name={`Kecamatan${props.alamat ? props.alamat : ""}`}
+          placeholder="Kecamatan"
+          component={FormText}
+          disabled={props.disabled}
+        />
       </div>
       <div className="uk-margin uk-child-width-1-2 uk-flex">
-        <Field name="Kota" placeholder="Kota" component={FormText} />
-        <Field name="Provinsi" placeholder="Provinsi" component={FormText} />
+        <Field
+          name={`Kota${props.alamat ? props.alamat : ""}`}
+          placeholder="Kota"
+          component={FormText}
+          disabled={props.disabled}
+        />
+        <Field
+          name={`Provinsi${props.alamat ? props.alamat : ""}`}
+          placeholder="Provinsi"
+          component={FormText}
+          disabled={props.disabled}
+        />
       </div>
     </React.Fragment>
   );

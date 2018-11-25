@@ -2,16 +2,6 @@ import React from "react";
 import { FormText, FormSelect, FormRadio } from "../../components/child/form";
 import { Field } from "formik";
 export default function FormGuru(props) {
-  const {
-    values,
-    touched,
-    errors,
-    isSubmitting,
-    handleChange,
-    handleBlur,
-    handleSubmit,
-    setFieldValue
-  } = props;
   return (
     <React.Fragment>
       <div className="uk-margin">
@@ -21,7 +11,7 @@ export default function FormGuru(props) {
         <Field name="NIP" placeholder="NIP" component={FormText} />
       </div>
       <div className="uk-margin uk-flex uk-flex-around">
-        <Field name="JenisKelamin" component={FormSelect}>
+        <Field name="Jenis_Kelamin" component={FormSelect}>
           <option value={0}>Kelamin</option>
           <option value={1}>Laki-Laki</option>
           <option value={2}>Perempuan</option>

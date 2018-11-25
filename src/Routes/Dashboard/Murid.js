@@ -10,10 +10,14 @@ import { Link, Route } from "react-router-dom";
 import Muridinfo from "../../components/container/Muridinfo";
 export default class MuridList extends Component {
   state = {
-    murid: [{ nama: "harapan", id: "2" }, { nama: "tukijem", id: "1" }],
+    murid: DbGuru.murid(),
     search: [],
     focus: false
   };
+  handlestate = () => {
+    this.setState({ murid: DbGuru.murid() });
+  };
+
   HandleFocus = () => {
     this.setState({ focus: true });
   };
@@ -90,6 +94,7 @@ export default class MuridList extends Component {
                     ? this.state.search
                     : this.state.murid
                 }
+                CallBack={this.handlestate}
               />
             ) : (
               <div
@@ -125,7 +130,7 @@ export default class MuridList extends Component {
                           marginTop: "25px"
                         }}
                       >
-                        <AddMurid />
+                        <AddMurid CallBack={this.handlestate} />
                       </div>
                     )}
                   />
@@ -136,7 +141,18 @@ export default class MuridList extends Component {
                       const data = this.state.murid.find(
                         murid => murid.id === params.id
                       );
-                      return <Muridinfo murid={data} />;
+                      return (
+                        <div
+                          className="uk-text-bold "
+                          style={{
+                            height: "100vh",
+                            maxHeight: "calc(100% - 25px)",
+                            marginTop: "25px"
+                          }}
+                        >
+                          <Muridinfo murid={data} />
+                        </div>
+                      );
                     }}
                   />
                 </React.Fragment>

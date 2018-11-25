@@ -3,9 +3,14 @@ import * as Yup from "yup";
 import { Formik } from "formik";
 import Loading from "../child/loading";
 import Personal from "./MuridPage/Personal";
-export default class AddMurid extends Component {
+import OrangTua from "./MuridPage/OrangTua";
+import { Murid, DbGuru } from "../../data";
+import shortid from "shortid";
+import { withRouter } from "react-router-dom";
+class AddMurid extends Component {
   state = {
-    page: 0
+    page: 0,
+    checked: false
   };
   NextPage = () => {
     this.setState({
@@ -17,106 +22,180 @@ export default class AddMurid extends Component {
       page: this.state.page - 1
     });
   };
+  handleAddress = () => {
+    this.setState({ checked: !this.state.checked });
+  };
   render() {
-    const Page = [<Personal />];
-    const initValues = {
-      NamaMurid: "",
-      NISN: "",
-      NIS: "",
-      JenisKelamin: 0,
-      Agama: 0,
-      TempatLahir: "",
-      TanggalLahir: "",
-      Alamat: "",
-      Kelurahan: "",
-      Kecamatan: "",
-      Kota: "",
-      Provinsi: "",
-      ZIP: "",
-      NamaBapak: "",
-      NamaIbu: "",
-      PekerjaanBapak: "",
-      PekerjaanIbu: "",
-      Wali: "",
-      PekerjaanWali: "",
-      TinggiBadan: "",
-      BeratBadan: "",
-      Penglihatan: "",
-      Pendengaran: "",
-      Prestasi: ""
-    };
-    const validationSchema = Yup.object().shape({
-      NamaMurid: Yup.string().required("Tidak boleh kosong"),
-      NISN: Yup.number()
-        .typeError("Harus Nomor")
-        .required("Tidak boleh kosong"),
-      NIS: Yup.number()
-        .typeError("Harus Nomor")
-        .required("Tidak boleh kosong"),
-      JenisKelamin: Yup.number().min(1, "Pilih Salah Satu"),
-      Agama: Yup.number().min(1, "Pilih Salah Satu"),
-      TempatLahir: Yup.string().required("Tidak boleh kosong"),
-      TanggalLahir: Yup.string().required("Tidak boleh kosong"),
-      Alamat: Yup.string().required("Tidak boleh kosong"),
-      Kelurahan: Yup.string().required("Tidak boleh kosong"),
-      Kecamatan: Yup.string().required("Tidak boleh kosong"),
-      Kota: Yup.string().required("Tidak boleh kosong"),
-      Provinsi: Yup.string().required("Tidak boleh kosong"),
-      ZIP: Yup.number()
-        .typeError("Harus Nomor")
-        .required("Tidak boleh kosong"),
-      NamaBapak: Yup.string().required("Tidak boleh kosong"),
-      NamaIbu: Yup.string().required("Tidak boleh kosong"),
-      PekerjaanBapak: Yup.string().required("Tidak boleh kosong"),
-      PekerjaanIbu: Yup.string().required("Tidak boleh kosong"),
-      Wali: Yup.string().required("Tidak boleh kosong"),
-      PekerjaanWali: Yup.string().required("Tidak boleh kosong"),
-      TinggiBadan: Yup.string().required("Tidak boleh kosong"),
-      BeratBadan: Yup.string().required("Tidak boleh kosong"),
-      Penglihatan: Yup.string().required("Tidak boleh kosong"),
-      Pendengaran: Yup.string().required("Tidak boleh kosong"),
-      Prestasi: Yup.string().required("Tidak boleh kosong")
-    });
+    const Page = [<Personal />, <OrangTua CallBack={this.handleAddress} />];
+
+    const initValues = this.state.checked
+      ? {
+          NamaMurid: "",
+          NISN: "",
+          NIS: "",
+          JenisKelamin: 0,
+          Agama: 0,
+          TempatLahir: "",
+          TanggalLahir: "",
+          Alamat: "",
+          Kelurahan: "",
+          Kecamatan: "",
+          Kota: "",
+          Provinsi: "",
+          ZIP: "",
+          NamaBapak: "",
+          NamaIbu: "",
+          PekerjaanBapak: "",
+          PekerjaanIbu: ""
+        }
+      : {
+          NamaMurid: "",
+          NISN: "",
+          NIS: "",
+          JenisKelamin: 0,
+          Agama: 0,
+          TempatLahir: "",
+          TanggalLahir: "",
+          Alamat: "",
+          Kelurahan: "",
+          Kecamatan: "",
+          Kota: "",
+          Provinsi: "",
+          ZIP: "",
+          AlamatOrangTua: "",
+          KelurahanOrangTua: "",
+          KecamatanOrangTua: "",
+          KotaOrangTua: "",
+          ProvinsiOrangTua: "",
+          ZIPOrangTua: "",
+          NamaBapak: "",
+          NamaIbu: "",
+          PekerjaanBapak: "",
+          PekerjaanIbu: ""
+        };
+    const validationSchema = this.state.checked
+      ? Yup.object().shape({
+          NamaMurid: Yup.string().required("Tidak boleh kosong"),
+          NISN: Yup.number()
+            .typeError("Harus Nomor")
+            .required("Tidak boleh kosong"),
+          NIS: Yup.number()
+            .typeError("Harus Nomor")
+            .required("Tidak boleh kosong"),
+          JenisKelamin: Yup.number().min(1, "Pilih Salah Satu"),
+          Agama: Yup.number().min(1, "Pilih Salah Satu"),
+          TempatLahir: Yup.string().required("Tidak boleh kosong"),
+          TanggalLahir: Yup.string().required("Tidak boleh kosong"),
+          Alamat: Yup.string().required("Tidak boleh kosong"),
+          Kelurahan: Yup.string().required("Tidak boleh kosong"),
+          Kecamatan: Yup.string().required("Tidak boleh kosong"),
+          Kota: Yup.string().required("Tidak boleh kosong"),
+          Provinsi: Yup.string().required("Tidak boleh kosong"),
+          ZIP: Yup.number()
+            .typeError("Harus Nomor")
+            .required("Tidak boleh kosong"),
+          NamaBapak: Yup.string().required("Tidak boleh kosong"),
+          NamaIbu: Yup.string().required("Tidak boleh kosong"),
+          PekerjaanBapak: Yup.string().required("Tidak boleh kosong"),
+          PekerjaanIbu: Yup.string().required("Tidak boleh kosong")
+        })
+      : Yup.object().shape({
+          NamaMurid: Yup.string().required("Tidak boleh kosong"),
+          NISN: Yup.number()
+            .typeError("Harus Nomor")
+            .required("Tidak boleh kosong"),
+          NIS: Yup.number()
+            .typeError("Harus Nomor")
+            .required("Tidak boleh kosong"),
+          JenisKelamin: Yup.number().min(1, "Pilih Salah Satu"),
+          AlamatOrangTua: Yup.string().required("Tidak boleh kosong"),
+          KelurahanOrangTua: Yup.string().required("Tidak boleh kosong"),
+          KecamatanOrangTua: Yup.string().required("Tidak boleh kosong"),
+          KotaOrangTua: Yup.string().required("Tidak boleh kosong"),
+          ProvinsiOrangTua: Yup.string().required("Tidak boleh kosong"),
+          ZIPOrangTua: Yup.number()
+            .typeError("Harus Nomor")
+            .required("Tidak boleh kosong"),
+          Agama: Yup.number().min(1, "Pilih Salah Satu"),
+          TempatLahir: Yup.string().required("Tidak boleh kosong"),
+          TanggalLahir: Yup.string().required("Tidak boleh kosong"),
+          Alamat: Yup.string().required("Tidak boleh kosong"),
+          Kelurahan: Yup.string().required("Tidak boleh kosong"),
+          Kecamatan: Yup.string().required("Tidak boleh kosong"),
+          Kota: Yup.string().required("Tidak boleh kosong"),
+          Provinsi: Yup.string().required("Tidak boleh kosong"),
+          ZIP: Yup.number()
+            .typeError("Harus Nomor")
+            .required("Tidak boleh kosong"),
+          NamaBapak: Yup.string().required("Tidak boleh kosong"),
+          NamaIbu: Yup.string().required("Tidak boleh kosong"),
+          PekerjaanBapak: Yup.string().required("Tidak boleh kosong"),
+          PekerjaanIbu: Yup.string().required("Tidak boleh kosong")
+        });
     return (
       <div className="animated zoomIn" style={{ animationDuration: ".2s" }}>
         <Formik
           initialValues={initValues}
           validationSchema={validationSchema}
-          onSubmit={(values, actions) => {
+          onSubmit={(values, { setSubmitting, resetForm }) => {
             setTimeout(() => {
-              // const id = shortid.generate();
-              // const id_sekolah =
-              //   values.id_sekolah !== "" && this.state.sekolah
-              //     ? values.id_sekolah
-              //     : shortid.generate();
-              // GuruKu.get("guru")
-              //   .push({
-              //     id: id,
-              //     id_sekolah: id_sekolah,
-              //     nama: values.Nama_Guru,
-              //     gender: values.JenisKelamin,
-              //     kelas: values.Kelas,
-              //     nip: values.NIP
-              //   })
-              //   .write();
-              // this.props.history.push("/");
-              console.log(values);
-              actions.setSubmitting(false);
+              const id = shortid.generate();
+              let date = values.TanggalLahir.split("-")
+                .reverse()
+                .join("/");
+              Murid.get("murid")
+                .push({
+                  id: id,
+                  guru: DbGuru.authId(),
+                  nama: values.NamaMurid,
+                  gender: values.JenisKelamin,
+                  nis: values.NIS,
+                  nisn: values.NISN,
+                  agama: values.Agama,
+                  tempatLahir: values.TempatLahir,
+                  tanggalLahir: date,
+                  alamat: {
+                    addr: values.Alamat,
+                    kec: values.Kecamatan,
+                    kel: values.Kelurahan,
+                    kota: values.Kota,
+                    provinsi: values.Provinsi,
+                    zip: values.ZIP
+                  },
+                  ortu: {
+                    bapak: values.NamaBapak,
+                    ibu: values.NamaIbu,
+                    pekerjaan_bapak: values.PekerjaanBapak,
+                    pekerjaan_ibu: values.PekerjaanIbu,
+                    alamat: this.state.checked
+                      ? {
+                          addr: values.Alamat,
+                          kec: values.Kecamatan,
+                          kel: values.Kelurahan,
+                          kota: values.Kota,
+                          provinsi: values.Provinsi,
+                          zip: values.ZIP
+                        }
+                      : {
+                          addr: values.AlamatOrangTua,
+                          kec: values.KecamatanOrangTua,
+                          kel: values.KelurahanOrangTua,
+                          kota: values.KotaOrangTua,
+                          provinsi: values.ProvinsiOrangTua,
+                          zip: values.ZIPOrangTua
+                        }
+                  }
+                })
+                .write();
+              this.props.CallBack();
+              setSubmitting(false);
+              resetForm();
+              this.setState({ page: 0 });
             }, 400);
           }}
         >
           {props => {
-            const {
-              values,
-              touched,
-              errors,
-              dirty,
-              isSubmitting,
-              handleChange,
-              handleBlur,
-              handleSubmit,
-              isValidating
-            } = props;
+            const { isSubmitting, handleSubmit } = props;
             return isSubmitting ? (
               <Loading />
             ) : (
@@ -124,7 +203,6 @@ export default class AddMurid extends Component {
                 className="uk-width-1-1 uk-flex-remove uk-padding-small"
                 onSubmit={handleSubmit}
               >
-                {console.log(values)}
                 <h1 className="uk-heading-primary uk-text-small uk-text-bold ">
                   Silahkan isi dengan data yang benar
                 </h1>
@@ -168,3 +246,5 @@ export default class AddMurid extends Component {
     );
   }
 }
+
+export default withRouter(AddMurid);

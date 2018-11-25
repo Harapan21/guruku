@@ -33,7 +33,7 @@ const DbGuru = {
       .value(),
   murid: () =>
     Murid.get("murid")
-      .find({ id_guru: DbGuru.authId() })
+      .filter({ guru: DbGuru.authId() })
       .value()
 };
 

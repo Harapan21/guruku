@@ -14,12 +14,13 @@ const FormText = ({
 }) => {
   const { className, ...rest } = props;
   return (
-    <div className={props.width ? props.width : ""}>
+    <div
+      style={{ padding: "0px 10px" }}
+      className={`uk-flex uk-flex-column ${props.width ? props.width : ""}`}
+    >
       <input
         type="text"
-        className={`${className} uk-input uk-width-expand ${errors[
-          field.name
-        ] &&
+        className={`${className} uk-input uk-width-auto ${errors[field.name] &&
           touched[field.name] &&
           "uk-form-danger"}`}
         disabled={isSubmitting}
@@ -48,19 +49,29 @@ const FormSelect = ({
 }) => {
   return (
     <div
-      uk-form-custom="target: > * > span:first-child "
-      className={props.width ? props.width : ""}
+      uk-form-custom={
+        props.transparent
+          ? props.transparent
+          : "target: > * > span:first-child "
+      }
+      style={{ padding: "0px 5px" }}
+      className={`uk-flex uk-flex-column ${props.width ? props.width : ""}`}
     >
+      {console.log(field)}
       <select {...field} {...props} className="uk-width-1-1">
         {props.children}
       </select>
-      <button
-        className="uk-button uk-button-default uk-width-1-1"
-        type="button"
-      >
+      {props.transparent ? (
         <span />
-        <span uk-icon="icon: chevron-down" />
-      </button>
+      ) : (
+        <button
+          className="uk-button uk-button-default uk-width-1-1"
+          type="button"
+        >
+          <span />
+          <span uk-icon="icon: chevron-down" />
+        </button>
+      )}
       {touched[field.name] && errors[field.name] && (
         <span className="uk-label uk-label-danger">{errors[field.name]}</span>
       )}

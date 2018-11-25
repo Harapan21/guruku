@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import gurusvg from "../../Style/guru.svg";
-import rounded from "../../Style/rounded-orange.svg";
 import { Link } from "react-router-dom";
 import Images from "../../components/child/Image";
 import accounIcon from "../../Style/account.svg";

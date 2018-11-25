@@ -78,13 +78,14 @@ export default class Create extends Component {
           Nama_Guru: "",
           NIP: "",
           Kelas: 0,
-          id_sekolah: ""
+          id_sekolah: "",
+          Jenis_Kelamin: 0
         }
       : {
           Nama_Guru: "",
           NIP: "",
           Kelas: 0,
-          JenisKelamin: 0,
+          Jenis_Kelamin: 0,
           Kapala_Sekolah: "",
           NIP2: "",
           id_sekolah: "",
@@ -105,7 +106,8 @@ export default class Create extends Component {
           NIP: Yup.number()
             .typeError("Harus Nomor")
             .required("Tidak boleh kosong"),
-          Kelas: Yup.number().min(1, "Pilih Salah Satu")
+          Kelas: Yup.number().min(1, "Pilih Salah Satu"),
+          Jenis_Kelamin: Yup.number().min(1, "Pilih Salah Satu")
         })
       : Yup.object().shape({
           Telp: Yup.string().required("Tidak boleh kosong"),
@@ -117,7 +119,7 @@ export default class Create extends Component {
             .typeError("Harus Nomor")
             .required("Tidak boleh kosong"),
           Kelas: Yup.number().min(1, "Pilih Salah Satu"),
-          JenisKelamin: Yup.number().min(1, "Pilih Salah Satu"),
+          Jenis_Kelamin: Yup.number().min(1, "Pilih Salah Satu"),
           Kapala_Sekolah: Yup.string().required("Tidak boleh kosong"),
           NIP2: Yup.number()
             .typeError("Harus Nomor")
@@ -179,7 +181,7 @@ export default class Create extends Component {
                     id: id,
                     id_sekolah: id_sekolah,
                     nama: values.Nama_Guru,
-                    gender: values.JenisKelamin,
+                    gender: values.Jenis_Kelamin,
                     kelas: values.Kelas,
                     nip: values.NIP
                   })
