@@ -140,9 +140,6 @@ class AddMurid extends Component {
           onSubmit={(values, { setSubmitting, resetForm }) => {
             setTimeout(() => {
               const id = shortid.generate();
-              let date = values.TanggalLahir.split("-")
-                .reverse()
-                .join("/");
               Murid.get("murid")
                 .push({
                   id: id,
@@ -153,7 +150,7 @@ class AddMurid extends Component {
                   nisn: values.NISN,
                   agama: values.Agama,
                   tempatLahir: values.TempatLahir,
-                  tanggalLahir: date,
+                  tanggalLahir: values.TanggalLahir,
                   alamat: {
                     addr: values.Alamat,
                     kec: values.Kecamatan,

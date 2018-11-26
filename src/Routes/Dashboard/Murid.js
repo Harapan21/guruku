@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import AddMurid from "../../components/container/AddMurid";
 import ListMurid from "../../components/container/ListMurid";
 import { DbGuru } from "../../data";
-import shortid from "shortid";
 import Images from "../../components/child/Image";
 import Back from "../../Style/back.svg";
 import Plus from "../../Style/plus.svg";
@@ -150,7 +149,7 @@ export default class MuridList extends Component {
                             marginTop: "25px"
                           }}
                         >
-                          <Muridinfo murid={data} />
+                          <Muridinfo murid={data} CallBack={this.handlestate} />
                         </div>
                       );
                     }}

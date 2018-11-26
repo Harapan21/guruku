@@ -20,7 +20,7 @@ const FormText = ({
     >
       <input
         type="text"
-        className={`${className} uk-input uk-width-auto ${errors[field.name] &&
+        className={`${className} uk-input uk-width-1-1 ${errors[field.name] &&
           touched[field.name] &&
           "uk-form-danger"}`}
         disabled={isSubmitting}
@@ -57,7 +57,6 @@ const FormSelect = ({
       style={{ padding: "0px 5px" }}
       className={`uk-flex uk-flex-column ${props.width ? props.width : ""}`}
     >
-      {console.log(field)}
       <select {...field} {...props} className="uk-width-1-1">
         {props.children}
       </select>

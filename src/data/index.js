@@ -6,17 +6,20 @@ const gurudb = new LocalStorage("guruku");
 const muriddb = new LocalStorage("murid");
 const authdb = new LocalStorage("auth");
 const sekolahdb = new LocalStorage("sekolah");
+const mapel = new LocalStorage("mapel");
 
 // connect to lowDB
 const GuruKu = low(gurudb);
 const Auth = low(authdb);
 const Murid = low(muriddb);
 const Sekolah = low(sekolahdb);
+const Mapel = low(mapel);
 
 const DbGuru = {
   declareDB: () => {
     GuruKu.defaults({ guru: [] }).write();
     Sekolah.defaults({ sekolah: [] }).write();
+    Mapel.defaults({ mapel: [] }).write();
     Murid.defaults({ murid: [] }).write();
     Auth.defaults({ auth: { id: "", isAuth: false } }).write();
   },

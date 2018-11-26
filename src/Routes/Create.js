@@ -228,7 +228,6 @@ export default class Create extends Component {
                   className="uk-form-stacked uk-width-large"
                   onSubmit={handleSubmit}
                 >
-                  {console.log(values)}
                   <h1 className="uk-heading-primary uk-text-lead uk-text-bold uk-text-center">
                     Silahkan isi dengan data yang benar
                   </h1>

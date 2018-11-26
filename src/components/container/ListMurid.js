@@ -57,6 +57,7 @@ class ListMurid extends Component {
               activeStyle={{
                 background: "#EBF5FF"
               }}
+              className="uk-text-small"
               style={{
                 color: "unset",
                 textDecoration: "none",
