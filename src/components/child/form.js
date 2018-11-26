@@ -1,15 +1,7 @@
 import React from "react";
 const FormText = ({
   field, // { name, value, onChange, onBlur }
-  form: {
-    values,
-    touched,
-    errors,
-    isSubmitting,
-    handleChange,
-    handleBlur,
-    handleSubmit
-  }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
+  form: { touched, errors, isSubmitting }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
   ...props
 }) => {
   const { className, ...rest } = props;

@@ -20,6 +20,7 @@ app.on("ready", () => {
     height: 600,
     minWidth: 1024,
     minHeight: 600,
+    titleBarStyle: "hidden",
     frame: false,
     show: false
   });

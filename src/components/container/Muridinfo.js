@@ -5,8 +5,6 @@ import { Formik, Field } from "formik";
 import { FormText, FormSelect } from "../child/form";
 import Loading from "../child/loading";
 import { Murid } from "../../data";
-const electron = window.require("electron");
-var screenElectron = electron.remote;
 const MuridInfoForm = props => {
   const { name, title, value } = props;
   return (

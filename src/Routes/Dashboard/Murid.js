@@ -7,6 +7,8 @@ import Back from "../../Style/back.svg";
 import Plus from "../../Style/plus.svg";
 import { Link, Route } from "react-router-dom";
 import Muridinfo from "../../components/container/Muridinfo";
+
+const os = window.require("os");
 export default class MuridList extends Component {
   state = {
     murid: DbGuru.murid(),
@@ -45,7 +47,8 @@ export default class MuridList extends Component {
               className="uk-width-1-1 uk-flex uk-flex-middle uk-flex-between "
               style={{
                 background: "#eee",
-                padding: "5px 10px"
+                padding:
+                  os.platform() !== "darwin" ? "5px 10px" : "25px 5px 5px 5px"
               }}
             >
               {!this.state.focus && (
@@ -99,7 +102,10 @@ export default class MuridList extends Component {
               <div
                 className="uk-padding-small uk-text-bold"
                 style={{
-                  height: "calc(100% - 54px)",
+                  height:
+                    os.platform() !== "darwin"
+                      ? "calc(100% - 54px)"
+                      : "calc(100% - 64px)",
                   overflowY: "scroll",
                   maxWidth: "100vw",
                   marginTop: "0px"
@@ -126,7 +132,7 @@ export default class MuridList extends Component {
                         style={{
                           height: "100vh",
                           maxHeight: "calc(100% - 25px)",
-                          marginTop: "25px"
+                          marginTop: os.platform() !== "darwin" ? "25px" : "0"
                         }}
                       >
                         <AddMurid CallBack={this.handlestate} />
@@ -146,7 +152,7 @@ export default class MuridList extends Component {
                           style={{
                             height: "100vh",
                             maxHeight: "calc(100% - 25px)",
-                            marginTop: "25px"
+                            marginTop: os.platform() !== "darwin" ? "25px" : "0"
                           }}
                         >
                           <Muridinfo murid={data} CallBack={this.handlestate} />

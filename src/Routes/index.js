@@ -4,11 +4,13 @@ import Home from "./Home";
 import Create from "./Create";
 import TopBar from "../components/container/TopBar";
 import Dashboard from "./Dashboard";
+
+const os = window.require("os");
 export default () => {
   return (
     <BrowserRouter>
       <React.Fragment>
-        <TopBar />
+        {os.platform() !== "darwin" && <TopBar />}
         <Switch>
           <Route exact path="/" render={() => <Home />} />
           <Route

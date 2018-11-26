@@ -47,7 +47,7 @@ export default class Dashboard extends Component {
             <Route
               exact
               path={`${this.props.match.url}/pengaturan`}
-              render={() => <Pengaturan />}
+              render={() => <Pengaturan match={this.props.match} />}
             />
           </div>
         )}

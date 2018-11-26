@@ -3,7 +3,6 @@ import minimaze from "../../Style/minimaze.svg";
 import fullScreen from "../../Style/fullScreen.svg";
 import Exit from "../../Style/Exit.svg";
 const remote = window.require("electron").remote;
-
 const win = remote.getCurrentWindow();
 export default class TopBar extends Component {
   constructor(props) {
