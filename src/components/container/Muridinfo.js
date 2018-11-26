@@ -154,14 +154,11 @@ class Muridinfo extends Component {
             return isSubmitting ? (
               <Loading />
             ) : (
-              <form
-                className=" uk-flex-remove uk-padding-small"
-                onSubmit={handleSubmit}
-              >
+              <form className=" uk-flex-remove " onSubmit={handleSubmit}>
                 <div
-                  className="uk-margin"
+                  className="uk-padding-small"
                   style={{
-                    maxHeight: this.state.height - 110 + "px",
+                    maxHeight: this.state.height - 120 + "px",
                     overflowY: "scroll"
                   }}
                 >
@@ -279,7 +276,7 @@ class Muridinfo extends Component {
                     title="Kode Pos"
                   />
                 </div>
-                <div className="uk-margin uk-flex uk-flex-right">
+                <div className="uk-flex uk-flex-right uk-padding-small">
                   <button
                     className="btn uk-button uk-button-default uk-child-width-1-2  box-shadow-lg radius"
                     type="submit"
