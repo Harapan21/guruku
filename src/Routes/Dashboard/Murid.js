@@ -152,7 +152,7 @@ export default class MuridList extends Component {
                           style={{
                             height: "100vh",
                             maxHeight: "calc(100% - 25px)",
-                            marginTop: os.platform() !== "darwin" ? "25px" : "0"
+                            marginTop: "25px"
                           }}
                         >
                           <Muridinfo murid={data} CallBack={this.handlestate} />

@@ -24,7 +24,6 @@ class ListMurid extends Component {
       menu.popup({ window: remote.getCurrentWindow() });
     };
   };
-
   render() {
     const {
       CallBack,
