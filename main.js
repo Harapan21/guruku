@@ -2,15 +2,21 @@ const electron = require("electron");
 const { app, BrowserWindow } = electron;
 const path = require("path");
 const url = require("url");
-
-process.env["ELECTRON_DISABLE_SECURITY_WARNINGS"] = false;
-process.env["ELECTRON_START_URL"] = "http://localhost:1234";
-
-// Let electron reloads by itself when webpack watches changes in ./app/
-
 require("electron-reload")(__dirname, {
   electron: require("${__dirname}/../../node_modules/electron")
 });
+var mongoose = require("mongoose");
+mongoose.connect("mongodb://guruku:guruku123*@ds227674.mlab.com:27674/guruku");
+
+var db = mongoose.connection;
+db.on("error", console.error.bind(console, "connection error:"));
+db.once("open", function() {
+  console.log("connected");
+});
+process.env["ELECTRON_DISABLE_SECURITY_WARNINGS"] = false;
+process.env["ELECTRON_START_URL"] = "http://localhost:1234";
+
+// Let electro
 
 // To avoid being garbage collected
 let mainWindow;

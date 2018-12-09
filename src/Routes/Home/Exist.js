@@ -22,7 +22,6 @@ export default class Exist extends Component {
     }).write();
   }
   render() {
-    console.log(this.props);
     return (
       <React.Fragment>
         <div

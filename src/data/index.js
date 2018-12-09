@@ -1,4 +1,6 @@
+import React from "react";
 import low from "lowdb";
+
 import LocalStorage from "lowdb/adapters/LocalStorage";
 
 // make DB in LocalStorage
@@ -23,21 +25,30 @@ const DbGuru = {
     Murid.defaults({ murid: [] }).write();
     Auth.defaults({ auth: { id: "", isAuth: false } }).write();
   },
-  authId: () => Auth.get("auth.id").value(),
-  allguru: () => GuruKu.get("guru").value(),
-  allsekolah: () => Sekolah.get("sekolah").value(),
-  guru: () =>
-    GuruKu.get("guru")
-      .find({ id: DbGuru.authId() })
-      .value(),
-  sekolah: () =>
-    Sekolah.get("sekolah")
-      .find({ id: DbGuru.guru().id_sekolah })
-      .value(),
-  murid: () =>
-    Murid.get("murid")
-      .filter({ guru: DbGuru.authId() })
-      .value()
+  authId: function() {
+    return Auth.get("auth.id").value();
+  },
+  allguru: function() {
+    return GuruKu.get("guru").value();
+  },
+  allsekolah: function() {
+    return Sekolah.get("sekolah").value();
+  },
+  guru: function() {
+    return GuruKu.get("guru")
+      .find({ id: this.authId() })
+      .value();
+  },
+  sekolah: function() {
+    return Sekolah.get("sekolah")
+      .find({ id: this.guru().id_sekolah })
+      .value();
+  },
+  murid: function() {
+    return Murid.get("murid")
+      .filter({ guru: this.authId() })
+      .value();
+  }
 };
 
 export { GuruKu, Auth, Murid, Sekolah, DbGuru };

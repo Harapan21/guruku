@@ -5,24 +5,7 @@ import { Formik, Field } from "formik";
 import { FormText, FormSelect } from "../child/form";
 import Loading from "../child/loading";
 import { Murid } from "../../data";
-const MuridInfoForm = props => {
-  const { name, title, value } = props;
-  return (
-    <div className="uk-margin uk-flex uk-flex-left uk-flex-middle  uk-flex-between">
-      <label className="uk-form-label">{props.title}</label>
-      <div className="uk-form-controls">
-        <Field
-          name={name}
-          style={{ width: value[name].length + 2 + "ch" }}
-          placeholder={title}
-          className="uk-form-blank uk-text-right"
-          component={FormText}
-        />
-      </div>
-    </div>
-  );
-};
-
+import FormHeavy from "../child/FormHeavy";
 class Muridinfo extends Component {
   state = { height: 0 };
 
@@ -161,12 +144,12 @@ class Muridinfo extends Component {
                   }}
                 >
                   <label className="uk-form-label">Personal</label>
-                  <MuridInfoForm
+                  <FormHeavy
                     name="NamaMurid"
                     value={values}
                     title="Nama Murid"
                   />
-                  <MuridInfoForm name="NISN" value={values} title="NISN" />
+                  <FormHeavy name="NISN" value={values} title="NISN" />
                   <div className="uk-margin uk-flex uk-flex-left uk-flex-middle uk-flex-between">
                     <label className="uk-form-label">Agama</label>
                     <div
@@ -197,7 +180,7 @@ class Muridinfo extends Component {
                       </Field>
                     </div>
                   </div>
-                  <MuridInfoForm
+                  <FormHeavy
                     name="TempatLahir"
                     value={values}
                     title="Tempat Lahir"
@@ -214,61 +197,53 @@ class Muridinfo extends Component {
                       />
                     </div>
                   </div>
-                  <MuridInfoForm name="Alamat" value={values} title="Alamat" />
-                  <MuridInfoForm
+                  <FormHeavy name="Alamat" value={values} title="Alamat" />
+                  <FormHeavy
                     name="Kelurahan"
                     value={values}
                     title="Kelurahan"
                   />
-                  <MuridInfoForm
+                  <FormHeavy
                     name="Kecamatan"
                     value={values}
                     title="Kecamatan"
                   />
-                  <MuridInfoForm name="Kota" value={values} title="Kota" />
-                  <MuridInfoForm name="ZIP" value={values} title="Kode Pos" />
+                  <FormHeavy name="Kota" value={values} title="Kota" />
+                  <FormHeavy name="ZIP" value={values} title="Kode Pos" />
                   <label className="uk-form-label">Orang Tua</label>
-                  <MuridInfoForm
+                  <FormHeavy
                     name="NamaBapak"
                     value={values}
                     title="Nama Bapak"
                   />
-                  <MuridInfoForm
-                    name="NamaIbu"
-                    value={values}
-                    title="Nama Ibu"
-                  />
-                  <MuridInfoForm
+                  <FormHeavy name="NamaIbu" value={values} title="Nama Ibu" />
+                  <FormHeavy
                     name="PekerjaanBapak"
                     value={values}
                     title="Pekerjaan Bapak"
                   />
-                  <MuridInfoForm
+                  <FormHeavy
                     name="PekerjaanIbu"
                     value={values}
                     title="Pekerjaan Ibu"
                   />
-                  <MuridInfoForm
+                  <FormHeavy
                     name="AlamatOrangTua"
                     value={values}
                     title="Alamat"
                   />
-                  <MuridInfoForm
+                  <FormHeavy
                     name="KelurahanOrangTua"
                     value={values}
                     title="Kelurahan"
                   />
-                  <MuridInfoForm
+                  <FormHeavy
                     name="KecamatanOrangTua"
                     value={values}
                     title="Kecamatan"
                   />
-                  <MuridInfoForm
-                    name="KotaOrangTua"
-                    value={values}
-                    title="Kota"
-                  />
-                  <MuridInfoForm
+                  <FormHeavy name="KotaOrangTua" value={values} title="Kota" />
+                  <FormHeavy
                     name="ZIPOrangTua"
                     value={values}
                     title="Kode Pos"

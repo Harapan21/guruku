@@ -7,8 +7,8 @@ import Back from "../../Style/back.svg";
 import Plus from "../../Style/plus.svg";
 import { Link, Route } from "react-router-dom";
 import Muridinfo from "../../components/container/Muridinfo";
-
 const os = window.require("os");
+
 export default class MuridList extends Component {
   state = {
     murid: DbGuru.murid(),

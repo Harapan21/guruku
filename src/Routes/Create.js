@@ -110,7 +110,9 @@ export default class Create extends Component {
           Jenis_Kelamin: Yup.number().min(1, "Pilih Salah Satu")
         })
       : Yup.object().shape({
-          Telp: Yup.string().required("Tidak boleh kosong"),
+          Telp: Yup.number()
+            .typeError("Harus Nomor")
+            .required("Tidak boleh kosong"),
           Email: Yup.string()
             .email("masukan email dengan benar")
             .required("Tidak boleh kosong"),
@@ -197,10 +199,11 @@ export default class Create extends Component {
                       kecamatan: values.Kecamatan,
                       kota: values.Kota,
                       provinsi: values.Provinsi,
-                      kapala: values.Kapala_Sekolah,
+                      kepala: values.Kapala_Sekolah,
                       nip_kepala: values.NIP2,
                       telp: values.Telp,
-                      email: values.Email
+                      email: values.Email,
+                      zip: values.ZIP
                     })
                     .write();
                 Auth.set("auth", { id: id, isAuth: true }).write();
