@@ -4,25 +4,27 @@ import ContentMapel from "../Mapel/ContentMapel";
 import Images from "../../components/child/Image";
 import Back from "../../Style/back.svg";
 import { Link } from "react-router-dom";
+import { DbGuru, Mapeldb } from "../../data";
+import shortid from "shortid";
 class Mapel extends Component {
   state = {
     page: 1,
-    mapel: [
-      "Agama",
-      "PPKN",
-      "BAHASA",
-      "MTK",
-      "IPA",
-      "IPS",
-      "SBDB",
-      "PJOK",
-      "B.Inggris"
-    ]
+    mapel: []
   };
+  componentDidMount() {
+    let temp = this.state.mapel;
+    DbGuru.mapel().map(
+      m => (!m.id || m.id_guru === DbGuru.authId()) && temp.push(m.name)
+    );
+    this.setState({ mapel: temp });
+  }
   pluspage = e => {
     const mapel = this.state.mapel;
     mapel.push(e);
     this.setState({ mapel });
+    Mapeldb.get("mapel")
+      .push({ id: shortid.generate(), name: e, id_guru: DbGuru.authId() })
+      .write();
   };
   changeStateFromNavbar = e => {
     this.setState({ page: e });
@@ -48,6 +50,7 @@ class Mapel extends Component {
               : this.state.mapel[this.state.page - 1]}
           </span>
         </h3>
+
         <NavbarMapel {...this.state} changePage={this.changeStateFromNavbar} />
         <ContentMapel page={this.state} plus={this.pluspage} />
       </div>

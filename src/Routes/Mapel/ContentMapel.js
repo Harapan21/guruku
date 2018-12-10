@@ -16,7 +16,7 @@ class MapelPlus extends Component {
           }, 100);
         }}
         validationSchema={Yup.object().shape({
-          Mapel: Yup.string().required("Required")
+          Mapel: Yup.string().required("Tidak Boleh Kosong")
         })}
       >
         {props => {
@@ -93,11 +93,13 @@ class MapelSection extends Component {
             <Loading />
           ) : (
             <form
-              className="uk-form-stacked uk-width-1-1 uk-padding-small animated fadeInUp"
-              style={{ animationDuration: ".3s" }}
+              className="uk-form-stacked uk-width-1-1 uk-padding-small uk-margin-remove"
               onSubmit={handleSubmit}
             >
-              <div className="uk-flex">
+              <div
+                className="uk-flex animated fadeInUp"
+                style={{ animationDuration: ".3s" }}
+              >
                 <div className="uk-width-1-2">
                   <label>PH</label>
                   <FormHeavy
@@ -167,6 +169,7 @@ class MapelSection extends Component {
                   />
                 </div>
               </div>
+
               <div className="uk-margin-small uk-text-right">
                 <button className="uk-button uk-button-default " type="submit">
                   Simpan

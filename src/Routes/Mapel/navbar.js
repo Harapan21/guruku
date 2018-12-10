@@ -3,9 +3,8 @@ export default class NavbarMapel extends Component {
   render() {
     return (
       <ul
-        className="uk-child-width-expand uk-padding-remove-top "
+        className="uk-child-width-expand uk-padding-remove-top uk-tab-bottom uk-margin-top"
         uk-tab="true"
-        style={{ marginTop: "10px" }}
       >
         {this.props.mapel.map((mapel, i) => (
           <li

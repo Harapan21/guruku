@@ -1,4 +1,3 @@
-import React from "react";
 import low from "lowdb";
 
 import LocalStorage from "lowdb/adapters/LocalStorage";
@@ -15,13 +14,25 @@ const GuruKu = low(gurudb);
 const Auth = low(authdb);
 const Murid = low(muriddb);
 const Sekolah = low(sekolahdb);
-const Mapel = low(mapel);
+const Mapeldb = low(mapel);
 
 const DbGuru = {
   declareDB: () => {
     GuruKu.defaults({ guru: [] }).write();
     Sekolah.defaults({ sekolah: [] }).write();
-    Mapel.defaults({ mapel: [] }).write();
+    Mapeldb.defaults({
+      mapel: [
+        { name: "Agama" },
+        { name: "PPKN" },
+        { name: "BAHASA" },
+        { name: "MTK" },
+        { name: "IPA" },
+        { name: "IPS" },
+        { name: "SBDP" },
+        { name: "PJOK" },
+        { name: "B.Inggris" }
+      ]
+    }).write();
     Murid.defaults({ murid: [] }).write();
     Auth.defaults({ auth: { id: "", isAuth: false } }).write();
   },
@@ -39,6 +50,9 @@ const DbGuru = {
       .find({ id: this.authId() })
       .value();
   },
+  mapel: function() {
+    return Mapeldb.get("mapel").value();
+  },
   sekolah: function() {
     return Sekolah.get("sekolah")
       .find({ id: this.guru().id_sekolah })
@@ -51,4 +65,4 @@ const DbGuru = {
   }
 };
 
-export { GuruKu, Auth, Murid, Sekolah, DbGuru };
+export { GuruKu, Auth, Murid, Sekolah, Mapeldb, DbGuru };
