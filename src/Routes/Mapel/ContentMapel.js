@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import { Formik, Field } from "formik";
+import { Formik, Field, FieldArray } from "formik";
 import * as Yup from "yup";
 import Loading from "../../components/child/loading";
 import { FormText } from "../../components/child/form";
-import FormHeavy from "../../components/child/FormHeavy";
 class MapelPlus extends Component {
   render() {
     return (
@@ -52,39 +51,44 @@ class MapelSection extends Component {
   render() {
     return (
       <Formik
-        initialValues={{
-          PenilaianHarian: "",
-          Praktik: "",
-          KD_PH1: "",
-          KD_PH2: "",
-          KD_PH3: "",
-          KD_PH4: "",
-          KD_P1: "",
-          KD_P2: "",
-          KD_P3: "",
-          KD_P4: ""
-        }}
+        initialValues={{ Praktik: [], PenilaianHarian: [] }}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
-            this.props.plus(values.Mapel);
+            console.log(values);
             setSubmitting(false);
           }, 100);
         }}
+        // validationSchema={Yup.object().shape({
+        //   PenilaianHarian: Yup.number()
+        //     .typeError("Harus Nomor")
+        //     .required("Tidak boleh kosong"),
+        //   Praktik: Yup.number()
+        //     .typeError("Harus Nomor")
+        //     .required("Tidak boleh kosong"),
+        //   KD_PH1: Yup.string().required("Tidak boleh kosong"),
+        //   KD_PH2: Yup.string().required("Tidak boleh kosong"),
+        //   KD_PH3: Yup.string().required("Tidak boleh kosong"),
+        //   KD_PH4: Yup.string().required("Tidak boleh kosong"),
+        //   KD_P1: Yup.string().required("Tidak boleh kosong"),
+        //   KD_P2: Yup.string().required("Tidak boleh kosong"),
+        //   KD_P3: Yup.string().required("Tidak boleh kosong"),
+        //   KD_P4: Yup.string().required("Tidak boleh kosong")
+        // })}
         validationSchema={Yup.object().shape({
-          PenilaianHarian: Yup.number()
-            .typeError("Harus Nomor")
-            .required("Tidak boleh kosong"),
-          Praktik: Yup.number()
-            .typeError("Harus Nomor")
-            .required("Tidak boleh kosong"),
-          KD_PH1: Yup.string().required("Tidak boleh kosong"),
-          KD_PH2: Yup.string().required("Tidak boleh kosong"),
-          KD_PH3: Yup.string().required("Tidak boleh kosong"),
-          KD_PH4: Yup.string().required("Tidak boleh kosong"),
-          KD_P1: Yup.string().required("Tidak boleh kosong"),
-          KD_P2: Yup.string().required("Tidak boleh kosong"),
-          KD_P3: Yup.string().required("Tidak boleh kosong"),
-          KD_P4: Yup.string().required("Tidak boleh kosong")
+          Praktik: Yup.array()
+            .of(
+              Yup.object().shape({
+                deskripsi: Yup.string().required("Tidak boleh kosong")
+              })
+            )
+            .required("Kosong"),
+          PenilaianHarian: Yup.array()
+            .of(
+              Yup.object().shape({
+                deskripsi: Yup.string().required("Tidak boleh kosong")
+              })
+            )
+            .required("Kosong")
         })}
       >
         {props => {
@@ -93,79 +97,90 @@ class MapelSection extends Component {
             <Loading />
           ) : (
             <form
-              className="uk-form-stacked uk-width-1-1 uk-padding-small uk-margin-remove"
+              className="uk-form-stacked uk-width-1-1  uk-margin uk-card uk-card-default uk-card-body"
               onSubmit={handleSubmit}
             >
               <div
                 className="uk-flex animated fadeInUp"
                 style={{ animationDuration: ".3s" }}
               >
-                <div className="uk-width-1-2">
+                <div className="uk-width-1-2  uk-padding-small">
                   <label>PH</label>
-                  <FormHeavy
+                  <FieldArray
                     name="PenilaianHarian"
-                    value={values}
-                    title="Jumlah"
-                    placeholder="Penilaian Harian"
+                    render={arrayHelpers => (
+                      <div>
+                        {values.PenilaianHarian &&
+                          values.PenilaianHarian.length > 0 &&
+                          values.PenilaianHarian.map((PH, index) => (
+                            <div key={index} className="uk-flex uk-margin">
+                              <Field
+                                name={`PenilaianHarian[${index}].deskripsi`}
+                                width="uk-width-3-4 uk-padding-remove"
+                                component={FormText}
+                                placeholder={`KD ${index + 1}`}
+                                style={{
+                                  padding: 5
+                                }}
+                              />
+                              <button
+                                type="button"
+                                className="uk-button uk-button-danger uk-width-1-4  uk-margin-remove"
+                                onClick={() => arrayHelpers.remove(index)} // remove a friend from the list
+                              >
+                                Hapus
+                              </button>
+                            </div>
+                          ))}
+
+                        <button
+                          type="button"
+                          onClick={() => arrayHelpers.push({ deskripsi: "" })} // insert an empty string at a position
+                        >
+                          +
+                        </button>
+                      </div>
+                    )}
                   />
-                  <label>KD</label>
-                  <FormHeavy
-                    name="KD_PH1"
-                    value={values}
-                    title="1"
-                    placeholder="Deskripsi  "
-                  />
-                  <FormHeavy
-                    name="KD_PH2"
-                    value={values}
-                    title="2"
-                    placeholder="Deskripsi  "
-                  />
-                  <FormHeavy
-                    name="KD_PH3"
-                    value={values}
-                    title="3"
-                    placeholder="Deskripsi  "
-                  />
-                  <FormHeavy
-                    name="KD_PH4"
-                    value={values}
-                    title="4"
-                    placeholder="Deskripsi  "
-                  />
+                  {}
                 </div>
-                <div className="uk-width-1-2">
+                <div className="uk-width-1-2 uk-padding-small">
                   <label>Praktik</label>
-                  <FormHeavy
+                  <FieldArray
                     name="Praktik"
-                    value={values}
-                    title="Jumlah"
-                    placeholder="Praktik"
-                  />
-                  <label>KD</label>
-                  <FormHeavy
-                    name="KD_P1"
-                    value={values}
-                    title="1"
-                    placeholder="Deskripsi  "
-                  />
-                  <FormHeavy
-                    name="KD_P2"
-                    value={values}
-                    title="2"
-                    placeholder="Deskripsi  "
-                  />
-                  <FormHeavy
-                    name="KD_P3"
-                    value={values}
-                    title="3"
-                    placeholder="Deskripsi  "
-                  />
-                  <FormHeavy
-                    name="KD_P4"
-                    value={values}
-                    title="4"
-                    placeholder="Deskripsi  "
+                    render={arrayHelpers => (
+                      <div>
+                        {values.Praktik &&
+                          values.Praktik.length > 0 &&
+                          values.Praktik.map((PH, index) => (
+                            <div key={index} className="uk-flex uk-margin">
+                              <Field
+                                name={`Praktik[${index}].deskripsi`}
+                                width="uk-width-3-4 uk-padding-remove"
+                                component={FormText}
+                                placeholder={`KD ${index + 1}`}
+                                style={{
+                                  padding: 5
+                                }}
+                              />
+                              <button
+                                type="button"
+                                className="uk-button uk-button-danger uk-width-1-4  uk-margin-remove"
+                                onClick={() => arrayHelpers.remove(index)} // remove a friend from the list
+                              >
+                                Hapus
+                              </button>
+                            </div>
+                          ))}
+
+                        <button
+                          type="button"
+                          onClick={() => arrayHelpers.push({ name: "" })} // insert an empty string at a position
+                        >
+                          +
+                        </button>
+                      </div>
+                    )}
                   />
                 </div>
               </div>

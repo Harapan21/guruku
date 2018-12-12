@@ -64,12 +64,17 @@ export default class Home extends Component {
             <h3 className="uk-text-small uk-text-bold uk-margin-remove-bottom">
               Mata Pelajaran
             </h3>
-
             <h1
               className="uk-text-bold uk-text-large uk-margin-remove"
               style={{ fontSize: "2.5rem" }}
             >
-              8
+              {
+                [
+                  ...DbGuru.mapel().filter(
+                    m => !m.id_guru || m.id_guru === DbGuru.authId()
+                  )
+                ].length
+              }
             </h1>
           </div>
         </div>

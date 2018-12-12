@@ -1,10 +1,13 @@
 import React from "react";
+import { getIn } from "formik";
 const FormText = ({
   field, // { name, value, onChange, onBlur }
   form: { touched, errors, isSubmitting }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
   ...props
 }) => {
   const { className, ...rest } = props;
+  const error = getIn(errors, field.name);
+  const touch = getIn(touched, field.name);
   return (
     <div
       style={{ padding: "0px 10px" }}
@@ -19,9 +22,10 @@ const FormText = ({
         {...field}
         {...rest}
       />
-      {touched[field.name] && errors[field.name] && (
+      {(touched[field.name] && errors[field.name] && (
         <span className="uk-label uk-label-danger">{errors[field.name]}</span>
-      )}
+      )) ||
+        (touch && error && <span className="uk-text-danger">{error}</span>)}
     </div>
   );
 };
