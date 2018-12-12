@@ -12,7 +12,7 @@ export default class NavbarMapel extends Component {
             onClick={() => this.props.changePage(i + 1)}
             className={this.props.page === i + 1 ? "uk-active" : ""}
           >
-            <a href="#">{mapel}</a>
+            <a href="#">{mapel.name}</a>
           </li>
         ))}
         <li onClick={() => this.props.changePage(this.props.mapel.length + 1)}>

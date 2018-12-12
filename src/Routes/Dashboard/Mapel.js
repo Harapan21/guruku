@@ -9,22 +9,29 @@ import shortid from "shortid";
 class Mapel extends Component {
   state = {
     page: 1,
-    mapel: []
+    mapel: DbGuru.mapel().filter(
+      m => !m.id_guru || m.id_guru === DbGuru.authId()
+    )
   };
-  componentDidMount() {
-    let temp = this.state.mapel;
-    DbGuru.mapel().map(
-      m => (!m.id || m.id_guru === DbGuru.authId()) && temp.push(m.name)
-    );
-    this.setState({ mapel: temp });
-  }
   pluspage = e => {
-    const mapel = this.state.mapel;
-    mapel.push(e);
+    let mapel = this.state.mapel;
+    let data = { id: shortid.generate(), name: e, id_guru: DbGuru.authId() };
+    mapel.push(data);
     this.setState({ mapel });
     Mapeldb.get("mapel")
-      .push({ id: shortid.generate(), name: e, id_guru: DbGuru.authId() })
+      .push(data)
       .write();
+  };
+  removeMapel = id => {
+    Mapeldb.get("mapel")
+      .remove({ id: id })
+      .write();
+    this.setState({
+      page: this.state.page - 1,
+      mapel: DbGuru.mapel().filter(
+        m => !m.id_guru || m.id_guru === DbGuru.authId()
+      )
+    });
   };
   changeStateFromNavbar = e => {
     this.setState({ page: e });
@@ -47,8 +54,26 @@ class Mapel extends Component {
           <span style={{ marginLeft: "10px", fontSize: "13pt" }}>
             {this.state.mapel.length + 1 === this.state.page
               ? "Menambahkan Mapel"
-              : this.state.mapel[this.state.page - 1]}
+              : this.state.mapel[this.state.page - 1].name}
           </span>
+          {this.state.page - 1 !== this.state.mapel.length &&
+            (this.state.mapel[this.state.page - 1].id_guru && (
+              <span
+                className="animated fadeInUp"
+                onClick={() =>
+                  this.removeMapel(this.state.mapel[this.state.page - 1].id)
+                }
+                style={{
+                  fontSize: "9pt",
+                  color: "#ff5e62",
+                  marginLeft: "10px",
+                  cursor: "pointer",
+                  animationDuration: ".1s"
+                }}
+              >
+                Hapus
+              </span>
+            ))}
         </h3>
 
         <NavbarMapel {...this.state} changePage={this.changeStateFromNavbar} />

@@ -184,7 +184,8 @@ class MapelSection extends Component {
 }
 export default class ContentMapel extends Component {
   render() {
-    return this.props.page.mapel.length + 1 === this.props.page.page ? (
+    let isLastPage = this.props.page.mapel.length + 1 === this.props.page.page;
+    return isLastPage ? (
       <MapelPlus plus={this.props.plus} />
     ) : (
       <MapelSection {...this.props} />

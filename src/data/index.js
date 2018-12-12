@@ -15,22 +15,22 @@ const Auth = low(authdb);
 const Murid = low(muriddb);
 const Sekolah = low(sekolahdb);
 const Mapeldb = low(mapel);
-
+import shortid from "shortid";
 const DbGuru = {
   declareDB: () => {
     GuruKu.defaults({ guru: [] }).write();
     Sekolah.defaults({ sekolah: [] }).write();
     Mapeldb.defaults({
       mapel: [
-        { name: "Agama" },
-        { name: "PPKN" },
-        { name: "BAHASA" },
-        { name: "MTK" },
-        { name: "IPA" },
-        { name: "IPS" },
-        { name: "SBDP" },
-        { name: "PJOK" },
-        { name: "B.Inggris" }
+        { id: shortid.generate(), name: "Agama" },
+        { id: shortid.generate(), name: "PPKN" },
+        { id: shortid.generate(), name: "BAHASA" },
+        { id: shortid.generate(), name: "MTK" },
+        { id: shortid.generate(), name: "IPA" },
+        { id: shortid.generate(), name: "IPS" },
+        { id: shortid.generate(), name: "SBDP" },
+        { id: shortid.generate(), name: "PJOK" },
+        { id: shortid.generate(), name: "B.Inggris" }
       ]
     }).write();
     Murid.defaults({ murid: [] }).write();
