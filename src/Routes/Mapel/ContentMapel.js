@@ -68,15 +68,6 @@ class MapelSection extends Component {
           .find({ id: mapel[page - 1].id })
           .value()
       : { id: mapel[page - 1].id, Praktik: [], PenilaianHarian: [] };
-    console.log(
-      GuruKu.get("guru")
-        .find({ id: DbGuru.authId() })
-        .get("semester")
-        .find({ id: semester })
-        .get("values")
-        .find({ id: mapel[page - 1].id })
-        .value()
-    );
     return (
       <Formik
         enableReinitialize={true}

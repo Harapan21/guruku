@@ -8,6 +8,7 @@ import ContentRaport from "../Raport/ContentRaport";
 export default class Raport extends Component {
   state = {
     page: 1,
+    semester: "1",
     mapel: DbGuru.mapel().filter(
       m => !m.id_guru || m.id_guru === DbGuru.authId()
     )
@@ -16,6 +17,9 @@ export default class Raport extends Component {
     this.setState({ page: e });
   };
 
+  changeStateSemester = e => {
+    this.setState({ semester: e });
+  };
   render() {
     return (
       <div className="uk-height-1-1 uk-padding">
@@ -30,8 +34,12 @@ export default class Raport extends Component {
             Raport {this.state.mapel[this.state.page - 1].name}
           </span>
         </h3>
+
         <NavbarMapel {...this.state} changePage={this.changeStateFromNavbar} />
-        <ContentRaport />
+        <ContentRaport
+          semester={this.state.semester}
+          CallBack={this.changeStateSemester}
+        />
       </div>
     );
   }

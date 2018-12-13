@@ -1,14 +1,20 @@
 import React, { Component } from "react";
+import Semester from "../Mapel/Semester";
 
 export default class ContentRaport extends Component {
   render() {
     return (
-      <table class="uk-table uk-table-justify uk-table-divider">
+      <table className="uk-table uk-table-justify uk-table-divider">
         <thead>
           <tr>
-            <th class="uk-width-small">Nama Murid </th>
-            <th>Table Heading</th>
-            <th>Table Heading</th>
+            <th className="uk-width-small">Nama Murid </th>
+            <th className="uk-padding-remove uk-width-small">
+              <Semester
+                className="uk-padding-remove uk-margin-remove"
+                semester={this.props.semester}
+                CallBack={this.props.CallBack}
+              />
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -19,21 +25,7 @@ export default class ContentRaport extends Component {
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </td>
             <td>
-              <button class="uk-button uk-button-default" type="button">
-                Button
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>Table Data</td>
-            <td>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </td>
-            <td>
-              <button class="uk-button uk-button-default" type="button">
-                Button
-              </button>
+              <button className="uk-button uk-button-text">Text</button>
             </td>
           </tr>
         </tbody>

@@ -6,6 +6,7 @@ import Back from "../../Style/back.svg";
 import { Link } from "react-router-dom";
 import { DbGuru, Mapeldb } from "../../data";
 import shortid from "shortid";
+import Semester from "../Mapel/Semester";
 class Mapel extends Component {
   state = {
     page: 1,
@@ -37,6 +38,10 @@ class Mapel extends Component {
   changeStateFromNavbar = e => {
     this.setState({ page: e });
   };
+  changeStateSemester = e => {
+    this.setState({ semester: e });
+  };
+
   render() {
     return (
       <div className="uk-height-1-1 ">
@@ -83,16 +88,10 @@ class Mapel extends Component {
         />
 
         {this.state.page - 1 !== this.state.mapel.length && (
-          <div className="uk-padding-small">
-            <select
-              className="uk-select"
-              value={this.state.semester}
-              onChange={e => this.setState({ semester: e.target.value })}
-            >
-              <option value={1}>Semester 1</option>
-              <option value={2}>Semester 2</option>
-            </select>
-          </div>
+          <Semester
+            semester={this.state.semester}
+            CallBack={this.changeStateSemester}
+          />
         )}
         <ContentMapel page={this.state} plus={this.pluspage} />
       </div>

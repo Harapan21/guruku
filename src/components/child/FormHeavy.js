@@ -18,7 +18,6 @@ export default function FormHeavy(props) {
           component={FormText}
         />
       </div>
-      {console.log(value)}
     </div>
   );
 }
