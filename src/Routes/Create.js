@@ -185,7 +185,8 @@ export default class Create extends Component {
                     nama: values.Nama_Guru,
                     gender: values.Jenis_Kelamin,
                     kelas: values.Kelas,
-                    nip: values.NIP
+                    nip: values.NIP,
+                    semester: [{ id: "1", values: [] }, { id: "2", values: [] }]
                   })
                   .write();
                 !this.state.sekolah &&

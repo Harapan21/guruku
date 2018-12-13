@@ -3,6 +3,7 @@ import { Formik, Field, FieldArray } from "formik";
 import * as Yup from "yup";
 import Loading from "../../components/child/loading";
 import { FormText } from "../../components/child/form";
+import { GuruKu, DbGuru } from "../../data";
 class MapelPlus extends Component {
   render() {
     return (
@@ -49,46 +50,69 @@ class MapelPlus extends Component {
 }
 class MapelSection extends Component {
   render() {
+    const { semester, mapel, page } = this.props.page;
+    let logic =
+      GuruKu.get("guru")
+        .find({ id: DbGuru.authId() })
+        .get("semester")
+        .find({ id: semester })
+        .get("values")
+        .find({ id: mapel[page - 1].id })
+        .value() === undefined;
+    let initValues = !logic
+      ? GuruKu.get("guru")
+          .find({ id: DbGuru.authId() })
+          .get("semester")
+          .find({ id: semester })
+          .get("values")
+          .find({ id: mapel[page - 1].id })
+          .value()
+      : { id: mapel[page - 1].id, Praktik: [], PenilaianHarian: [] };
+    console.log(
+      GuruKu.get("guru")
+        .find({ id: DbGuru.authId() })
+        .get("semester")
+        .find({ id: semester })
+        .get("values")
+        .find({ id: mapel[page - 1].id })
+        .value()
+    );
     return (
       <Formik
-        initialValues={{ Praktik: [], PenilaianHarian: [] }}
+        enableReinitialize={true}
+        initialValues={initValues}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
-            console.log(values);
+            logic
+              ? GuruKu.get("guru")
+                  .find({ id: DbGuru.authId() })
+                  .get("semester")
+                  .find({ id: semester })
+                  .get("values")
+                  .push({ ...values })
+                  .write()
+              : GuruKu.get("guru")
+                  .find({ id: DbGuru.authId() })
+                  .get("semester")
+                  .find({ id: semester })
+                  .get("values")
+                  .find({ id: mapel[page - 1].id })
+                  .assign({ ...values })
+                  .write();
             setSubmitting(false);
           }, 100);
         }}
-        // validationSchema={Yup.object().shape({
-        //   PenilaianHarian: Yup.number()
-        //     .typeError("Harus Nomor")
-        //     .required("Tidak boleh kosong"),
-        //   Praktik: Yup.number()
-        //     .typeError("Harus Nomor")
-        //     .required("Tidak boleh kosong"),
-        //   KD_PH1: Yup.string().required("Tidak boleh kosong"),
-        //   KD_PH2: Yup.string().required("Tidak boleh kosong"),
-        //   KD_PH3: Yup.string().required("Tidak boleh kosong"),
-        //   KD_PH4: Yup.string().required("Tidak boleh kosong"),
-        //   KD_P1: Yup.string().required("Tidak boleh kosong"),
-        //   KD_P2: Yup.string().required("Tidak boleh kosong"),
-        //   KD_P3: Yup.string().required("Tidak boleh kosong"),
-        //   KD_P4: Yup.string().required("Tidak boleh kosong")
-        // })}
         validationSchema={Yup.object().shape({
-          Praktik: Yup.array()
-            .of(
-              Yup.object().shape({
-                deskripsi: Yup.string().required("Tidak boleh kosong")
-              })
-            )
-            .required("Kosong"),
-          PenilaianHarian: Yup.array()
-            .of(
-              Yup.object().shape({
-                deskripsi: Yup.string().required("Tidak boleh kosong")
-              })
-            )
-            .required("Kosong")
+          Praktik: Yup.array().of(
+            Yup.object().shape({
+              deskripsi: Yup.string().required("Tidak boleh kosong")
+            })
+          ),
+          PenilaianHarian: Yup.array().of(
+            Yup.object().shape({
+              deskripsi: Yup.string().required("Tidak boleh kosong")
+            })
+          )
         })}
       >
         {props => {
@@ -97,14 +121,14 @@ class MapelSection extends Component {
             <Loading />
           ) : (
             <form
-              className="uk-form-stacked uk-width-1-1  uk-margin uk-card uk-card-default uk-card-body"
+              className="uk-form-stacked uk-width-1-1 uk-card uk-card-default uk-card-body uk-margin-remove uk-padding-remove"
               onSubmit={handleSubmit}
             >
               <div
-                className="uk-flex animated fadeInUp"
+                className="uk-flex animated fadeInUp uk-margin-remove uk-padding-remove"
                 style={{ animationDuration: ".3s" }}
               >
-                <div className="uk-width-1-2  uk-padding-small">
+                <div className="uk-width-1-2 uk-padding-small">
                   <label>PH</label>
                   <FieldArray
                     name="PenilaianHarian"
@@ -144,7 +168,7 @@ class MapelSection extends Component {
                   />
                   {}
                 </div>
-                <div className="uk-width-1-2 uk-padding-small">
+                <div className="uk-width-1-2  uk-padding-small">
                   <label>Praktik</label>
                   <FieldArray
                     name="Praktik"
@@ -175,7 +199,7 @@ class MapelSection extends Component {
 
                         <button
                           type="button"
-                          onClick={() => arrayHelpers.push({ name: "" })} // insert an empty string at a position
+                          onClick={() => arrayHelpers.push({ deskripsi: "" })} // insert an empty string at a position
                         >
                           +
                         </button>
@@ -185,7 +209,7 @@ class MapelSection extends Component {
                 </div>
               </div>
 
-              <div className="uk-margin-small uk-text-right">
+              <div className="uk-margin uk-text-right  uk-padding-small">
                 <button className="uk-button uk-button-default " type="submit">
                   Simpan
                 </button>

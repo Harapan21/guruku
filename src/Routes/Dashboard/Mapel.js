@@ -9,6 +9,7 @@ import shortid from "shortid";
 class Mapel extends Component {
   state = {
     page: 1,
+    semester: "1",
     mapel: DbGuru.mapel().filter(
       m => !m.id_guru || m.id_guru === DbGuru.authId()
     )
@@ -75,8 +76,24 @@ class Mapel extends Component {
               </span>
             ))}
         </h3>
+        <NavbarMapel
+          {...this.state}
+          changePage={this.changeStateFromNavbar}
+          plus={true}
+        />
 
-        <NavbarMapel {...this.state} changePage={this.changeStateFromNavbar} />
+        {this.state.page - 1 !== this.state.mapel.length && (
+          <div className="uk-padding-small">
+            <select
+              className="uk-select"
+              value={this.state.semester}
+              onChange={e => this.setState({ semester: e.target.value })}
+            >
+              <option value={1}>Semester 1</option>
+              <option value={2}>Semester 2</option>
+            </select>
+          </div>
+        )}
         <ContentMapel page={this.state} plus={this.pluspage} />
       </div>
     );

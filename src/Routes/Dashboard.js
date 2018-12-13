@@ -42,7 +42,7 @@ export default class Dashboard extends Component {
             <Route
               exact
               path={`${this.props.match.url}/raport`}
-              render={() => <Raport />}
+              render={() => <Raport match={this.props.match} />}
             />
             <Route
               exact

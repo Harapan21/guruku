@@ -1,10 +1,18 @@
 import React, { Component } from "react";
+import NavbarMapel from "../Mapel/navbar";
+import { DbGuru } from "../../data";
+import { Link } from "react-router-dom";
+import Back from "../../Style/back.svg";
+import Images from "../../components/child/Image";
+import ContentRaport from "../Raport/ContentRaport";
 export default class Raport extends Component {
   state = {
-    page: 0,
-    mapel: ["Agama", "PPKN", "BI", "MTK", "IPA", "IPS", "SBDB", "PJOK"]
+    page: 1,
+    mapel: DbGuru.mapel().filter(
+      m => !m.id_guru || m.id_guru === DbGuru.authId()
+    )
   };
-  setTabs = e => {
+  changeStateFromNavbar = e => {
     this.setState({ page: e });
   };
 
@@ -12,26 +20,18 @@ export default class Raport extends Component {
     return (
       <div className="uk-height-1-1 uk-padding">
         <h3 className="uk-heading-primary uk-text-bold uk-text-lead uk-padding-remove uk-margin-remove">
-          Mata Pelajaran
+          <Link
+            to={this.props.match.url + "/home"}
+            className="animated fadeInLeft uk-button uk-button-text faster"
+          >
+            <Images src={Back} width={15} />
+          </Link>
+          <span style={{ marginLeft: "10px", fontSize: "13pt" }}>
+            Raport {this.state.mapel[this.state.page - 1].name}
+          </span>
         </h3>
-        <ul
-          class="uk-child-width-expand uk-padding-remove-top "
-          uk-tab="true"
-          style={{ marginTop: "10px" }}
-        >
-          {this.state.mapel.map((mapel, i) => (
-            <li
-              key={i}
-              className={this.state.page === i + 1 ? "uk-active" : ""}
-              onClick={() => this.setTabs(i + 1)}
-            >
-              <a href="#">{mapel}</a>
-            </li>
-          ))}
-          <li onClick={() => this.setTabs(this.state.mapel.length + 1)}>
-            <a href="#">+</a>
-          </li>
-        </ul>
+        <NavbarMapel {...this.state} changePage={this.changeStateFromNavbar} />
+        <ContentRaport />
       </div>
     );
   }

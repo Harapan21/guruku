@@ -15,9 +15,13 @@ export default class NavbarMapel extends Component {
             <a href="#">{mapel.name}</a>
           </li>
         ))}
-        <li onClick={() => this.props.changePage(this.props.mapel.length + 1)}>
-          <a href="#">+</a>
-        </li>
+        {this.props.plus && (
+          <li
+            onClick={() => this.props.changePage(this.props.mapel.length + 1)}
+          >
+            <a href="#">+</a>
+          </li>
+        )}
       </ul>
     );
   }
