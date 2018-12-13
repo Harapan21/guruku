@@ -19,7 +19,7 @@ export default class ContentRaport extends Component {
         </thead>
         <tbody>
           <tr>
-            <td>Table Data</td>
+            <td>Nama Murid</td>
             <td>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
